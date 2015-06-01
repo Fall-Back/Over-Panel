@@ -4,30 +4,28 @@
 
 // Colours:
 
-$fallback--over-panel--bg-color:              #aaa !default;
+$fallback--over-panel--bg-color:                   #aaa !default;
 
-$fallback--over-panel__link--color:           #fff !default;
-$fallback--over-panel__link--color-alt:       $fallback--over-panel__link--color !default;
-$fallback--over-panel__link--bg-color:        #bbb !default;
-$fallback--over-panel__link--bg-color-alt:    #999 !default;
+$fallback--over-panel__link--color:                #fff !default;
+$fallback--over-panel__link--color-alt:            $fallback--over-panel__link--color !default;
+$fallback--over-panel__link--bg-color:             #bbb !default;
+$fallback--over-panel__link--bg-color-alt:         #999 !default;
 
 
 // Sizes:
 
-$fallback--over-panel__link--height:          20px !default;
-$fallback--over-panel--spacing:               5px !default;
+$fallback--over-panel__link--height:               20px !default;
+$fallback--over-panel--spacing:                    5px !default;
 
 
 // Breakpoints:
 
-$fallback--over-panel--breakpoint--enhanced:  720px !default;
+$fallback--over-panel--breakpoint--enhanced:       720px !default;
 
 
 // Transitons:
 $fallback--over-panel--transition-duration:        ease;
 $fallback--over-panel--transition-timing-function: 0.8s;
-
-
 
 
 // SVG's
@@ -36,15 +34,6 @@ $fallback--over-panel__open--svg:                  "data:image/svg+xml;base64,PH
 
 $fallback--over-panel__cancel--svg:                "data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIj48cGF0aCAgZmlsbD0iIzQ0NDQ0NCIgZD0iTTE1LjgzMyA1LjM0NmwtMS4xNzktMS4xNzktNC42NTQgNC42NTQtNC42NTQtNC42NTQtMS4xNzkgMS4xNzkgNC42NTQgNC42NTQtNC42NTQgNC42NTQgMS4xNzkgMS4xNzkgNC42NTQtNC42NTQgNC42NTQgNC42NTQgMS4xNzktMS4xNzktNC42NTQtNC42NTR6Ij48L3BhdGg+PC9zdmc+" !default;
 
-/*
-// Fall-Back PNG's:
-
-$fallback--over-panel__submit--png:           "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABTklEQVQ4T6VT21GDQBTNAv9qBaEDSQUij3+pQNMBnUgHagXJPw+3A0kFxg5SAA/P2VlmFtw4ZmQmA7t377nnsREr40mSJMfyEb9Ab7fjOBZ1Xb+Z58xvwUUYhtee570bjcvzbdd191LK07KgAOI4boUQt5j2hWXe933Lfdd1yaRAbY13W1XV5geApv3MZjQGyylkByAOWA/DsG2a5nUmwZieQevephVnHgCws7EQYDCyCRpvbBq1Rz48+uQ3ZCjZ0/N/gEskwKcDZE4RKxIiiqInx3FeUDzCxM0ZEz/ggW81cRHjEQdz+HHgPnQzWsbo26YrBtokRiV5F2wpsFnXJMAzk+XMUcohgwmIjWTA7JGWBPgdo0R9W5alumwzANv0ac+8UAA9ASRDpPLPAARK0zRAM5lccU1TLwJgE6SEePGPt1JMfqN9rqajLwCw/wY2tMxY4fByDwAAAABJRU5ErkJggg==" !default;
-
-
-// MQ hacks:
-$fallback--ie9--hack:                          "all and (min-width:0\0) and (min-resolution: .001dpcm)" !default;
-*/
 
 /*
     THE WAY THIS WORKS
@@ -54,12 +43,14 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
     sliding effect.
     However, Opera Mini and IE9 don't support transform (but do support Media Queries) so it breaks.
     In order to provide a functional fallback, I've set the initial clip state to 0 so that it's
-    hidden behind the wrapper. The :target-ted state sets the clip to be enormous (thus visible).
-    This, though, breaks the slide-up effect as the clip is set back  to 0 before the transition 
+    hidden. The :target-ted state sets the clip to be enormous (thus visible).
+    This, though, breaks the slide-up effect as the clip is set back to 0 before the transition 
     takes places, hiding it immediately.
     To get round this I've also transitioned the clip (on the 'closed' state only) and set a delay 
     so that the clip isn't change until after the slide transition has been completed.
     Since neither of these browser support transitions either, the clip delay is ignored.
+    
+    The same principle applies to the fade effect.
 
 */
 
@@ -98,10 +89,10 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
     
     .over-panel--slide {
         -webkit-transform: translateY(-100%);
-        -moz-transform: translateY(-100%);
-        -ms-transform: translateY(-100%);
-        -o-transform: translateY(-100%);
-        transform: translateY(-100%);
+        -moz-transform:    translateY(-100%);
+        -ms-transform:     translateY(-100%);
+        -o-transform:      translateY(-100%);
+        transform:         translateY(-100%);
 
         -webkit-transition: -webkit-transform $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function,
                             clip 0s $fallback--over-panel--transition-timing-function $fallback--over-panel--transition-duration;
@@ -121,9 +112,9 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         transform: translateY(0);   
         
         -webkit-transition: -webkit-transform $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function;
-        -moz-transition:   -moz-transform $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function;
-        -o-transition:     -o-transform $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function;
-        transition:        transform $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function;
+        -moz-transition:    -moz-transform $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function;
+        -o-transition:      -o-transform $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function;
+        transition:         transform $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function;
     }
     
     
@@ -147,9 +138,9 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
         opacity: 1;
         
         -webkit-transition: opacity $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function;
-        -moz-transition: opacity $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function;
-        -o-transition: opacity $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function;
-        transition: opacity $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function;
+        -moz-transition:    opacity $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function;
+        -o-transition:      opacity $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function;
+        transition:         opacity $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function;
         
     }
     
@@ -232,7 +223,8 @@ $fallback--ie9--hack:                          "all and (min-width:0\0) and (min
     .over-panel__close:active,
     .over-panel__close:active {
         text-decoration: none;
-        background-color: #999;
+        color: $fallback--over-panel__link--color-alt;
+        background-color: $fallback--over-panel__link--bg-color-alt;
     }
 }
 
