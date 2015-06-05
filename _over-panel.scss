@@ -188,7 +188,6 @@ $fallback--over-panel__cancel--svg:                "data:image/svg+xml;base64,PH
     */
     .over-panel__close {           
         position: absolute; /* [1] */
-        z-index: -1; /* [1] */
         top: 0; /* [1] */
         right: 0; /* [2] */
     }
