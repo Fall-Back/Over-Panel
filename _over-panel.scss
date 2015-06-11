@@ -4,17 +4,29 @@
 
 // Colours:
 
-$fallback--over-panel--bg-color:                   #aaa !default;
+// Slightly hacky way of allowing the main UI colour of this pattern to be:
+// - base-ui colour (if set)
+// - otherwise #999 
+// - but can be specifically overridden
+$t: false;
+@if variable-exists(fallback--base-ui-color) {
+    $t: $fallback--base-ui-color;
+} @else {
+    $t: #999;
+}
+$fallback--over-panel--ui-color:                   $t !default;
+
+$fallback--over-panel--bg-color:                   $fallback--over-panel--ui-color !default;
 
 $fallback--over-panel__link--color:                #fff !default;
-$fallback--over-panel__link--color-alt:            $fallback--over-panel__link--color !default;
-$fallback--over-panel__link--bg-color:             #bbb !default;
-$fallback--over-panel__link--bg-color-alt:         #999 !default;
+$fallback--over-panel__link--color--alt:           $fallback--over-panel__link--color !default;
+$fallback--over-panel__link--bg-color:             $fallback--over-panel--ui-color !default;
+$fallback--over-panel__link--bg-color--alt:        darken($fallback--over-panel--ui-color, 10%) !default;
 
 
 // Sizes:
 
-$fallback--over-panel__link--height:               20px !default;
+$fallback--over-panel__link--height:               40px !default;
 $fallback--over-panel--spacing:                    5px !default;
 
 
@@ -222,8 +234,8 @@ $fallback--over-panel__cancel--svg:                "data:image/svg+xml;base64,PH
     .over-panel__close:active,
     .over-panel__close:active {
         text-decoration: none;
-        color: $fallback--over-panel__link--color-alt;
-        background-color: $fallback--over-panel__link--bg-color-alt;
+        color: $fallback--over-panel__link--color--alt;
+        background-color: $fallback--over-panel__link--bg-color--alt;
     }
 }
 
