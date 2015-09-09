@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------------------------*\
-    Fall-Back Over Panel Pattern v0.5
+    Fall-Back Over Panel Pattern v0.1
 \*------------------------------------------------------------------------------------------------*/
 
 // Colours:
@@ -26,10 +26,8 @@ $fallback--over-panel__link--bg-color--alt:        darken($fallback--over-panel-
 
 // Sizes:
 
-$fallback--over-panel__link--height:              ($fallback--base-em-ratio * 2em) !default;
-$fallback--over-panel--spacing:                   ($fallback--over-panel__link--height / 8) !default;
-//$fallback--over-panel__link--height:               40px !default;
-//$fallback--over-panel--spacing:                    5px !default;
+$fallback--over-panel__link--height:               40px !default;
+$fallback--over-panel--spacing:                    5px !default;
 
 
 // Breakpoints:
@@ -44,9 +42,9 @@ $fallback--over-panel--transition-timing-function: 0.8s;
 
 // SVG's
 
-$fallback--over-panel__open--svg:                 "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAyMCI+PHBhdGggZmlsbD0iIzQ0NCIgZD0iTTE5LjE0MyA4SC44NTdDLjA2NyA4IDAgOC44OTQgMCAxMGMwIDEuMTA0LjA2OCAyIC44NTcgMmgxOC4yODZjLjc5IDAgLjg1Ny0uODk2Ljg1Ny0yIDAtMS4xMDctLjA2OC0yLS44NTctMnptMCA4SC44NTdDLjA2NyAxNiAwIDE2Ljg5NCAwIDE4YzAgMS4xMDUuMDY4IDIgLjg1NyAyaDE4LjI4NmMuNzkgMCAuODU3LS44OTUuODU3LTIgMC0xLjEwNi0uMDY4LTItLjg1Ny0yek0uODU3IDRoMTguMjg2Yy43OSAwIC44NTctLjg5NS44NTctMiAwLTEuMTA2LS4wNjgtMi0uODU3LTJILjg1N0MuMDY3IDAgMCAuODk0IDAgMmMwIDEuMTA1LjA2OCAyIC44NTcgMnoiLz48L3N2Zz4=" !default;
-$fallback--over-panel__cancel--svg:               "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAyMCI+PHBhdGggZmlsbD0iIzQ0NCIgZD0iTTIwIDIuMDJMMTcuOTggMCAxMCA3Ljk4IDIuMDIgMCAwIDIuMDIgNy45OCAxMCAwIDE3Ljk4IDIuMDIgMjAgMTAgMTIuMDIgMTcuOTggMjAgMjAgMTcuOTggMTIuMDIgMTAgMjAgMi4wMnoiLz48L3N2Zz4=" !default;
+$fallback--over-panel__open--svg:                  "data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIj48cGF0aCBmaWxsPSIjZmZmZmZmIiBkPSJNMi41IDE1aDE1di0xLjY2N2gtMTV2MS42Njd6TTIuNSAxMC44MzNoMTV2LTEuNjY3aC0xNXYxLjY2N3pNMi41IDV2MS42NjdoMTV2LTEuNjY3aC0xNXoiPjwvcGF0aD48L3N2Zz4=" !default;
 
+$fallback--over-panel__cancel--svg:                "data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIj48cGF0aCAgZmlsbD0iIzQ0NDQ0NCIgZD0iTTE1LjgzMyA1LjM0NmwtMS4xNzktMS4xNzktNC42NTQgNC42NTQtNC42NTQtNC42NTQtMS4xNzkgMS4xNzkgNC42NTQgNC42NTQtNC42NTQgNC42NTQgMS4xNzkgMS4xNzkgNC42NTQtNC42NTQgNC42NTQgNC42NTQgMS4xNzktMS4xNzktNC42NTQtNC42NTR6Ij48L3BhdGg+PC9zdmc+" !default;
 
 
 /*
@@ -175,15 +173,14 @@ $fallback--over-panel__cancel--svg:               "data:image/svg+xml;base64,PHN
     .over-panel__close {
         color: $fallback--over-panel__link--color;
         background-color: $fallback--over-panel__link--bg-color;
-        width: $fallback--over-panel__link--height;
+        
+        @include fallback-rem(width, $fallback--over-panel__link--height);
         
         display: block;
         margin: 0;
-        padding: 0 ($fallback--over-panel--spacing * 2);
-        height: $fallback--over-panel__link--height;
-        line-height: $fallback--over-panel__link--height;
-        
-        text-align: center;
+        @include fallback-rem(padding, 0 ($fallback--over-panel--spacing * 2));
+        @include fallback-rem(height, $fallback--over-panel__link--height);
+        @include fallback-rem(line-height, $fallback--over-panel__link--height);
     }
     
     /*
@@ -212,8 +209,11 @@ $fallback--over-panel__cancel--svg:               "data:image/svg+xml;base64,PHN
         /* These styles are enough for modern FF to V-center the icon: */
         display: inline-block;
         vertical-align: middle;
-        width: $fallback--over-panel--spacing * 3;
-
+        /* IE10-11 flexbox chokes without width: */
+        @include fallback-rem(width, ($fallback--over-panel__link--height / 2 ));
+        /* IE11 flexbox stretches icon without height: */
+        @include fallback-rem(height, ($fallback--over-panel__link--height / 2 ));
+        /* But now blink pushes the icon to the bottom without line-height: 0. */
         line-height: 0;
     }
 
