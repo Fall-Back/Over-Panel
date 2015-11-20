@@ -16,6 +16,7 @@ $t: false;
 }
 $fallback--over-panel--ui-color:                   $t !default;
 
+
 $fallback--over-panel--bg-color:                   $fallback--over-panel--ui-color !default;
 
 $fallback--over-panel__link--color:                #fff !default;
@@ -24,9 +25,14 @@ $fallback--over-panel__link--bg-color:             $fallback--over-panel--ui-col
 $fallback--over-panel__link--bg-color--alt:        darken($fallback--over-panel--ui-color, 10%) !default;
 
 
+
+
+
+
+
 // Sizes:
 
-$fallback--over-panel__link--height:              ($fallback--base-em-ratio * 2em) !default;
+$fallback--over-panel__link--height:              ($fallback--base-em-ratio * 1.5em) !default;
 $fallback--over-panel--spacing:                   ($fallback--over-panel__link--height / 8) !default;
 //$fallback--over-panel__link--height:               40px !default;
 //$fallback--over-panel--spacing:                    5px !default;
@@ -70,7 +76,7 @@ $fallback--over-panel__cancel--svg:               "data:image/svg+xml;base64,PHN
 
 
 /* -- Enhanced layout --------------------------------------------------------------------------- */
- @media only screen and (max-width: ($fallback--over-panel--breakpoint--enhanced - 1)) {
+@media only screen and (max-width: ($fallback--over-panel--breakpoint--enhanced - 1)) {
     
     /*
         1. Make sure the over-panel is on top. (should be a variable).
@@ -170,9 +176,10 @@ $fallback--over-panel__cancel--svg:               "data:image/svg+xml;base64,PHN
       need some more thinking.
     */
 
-
-    .over-panel__open,
-    .over-panel__close {
+    // Double classes to up the specificity, as the 'open' link does not have to appear inside the
+    // `.over-panel` container. This is a shame and weird so re-think this
+    .over-panel__open.over-panel__open,
+    .over-panel__close.over-panel__close {
         color: $fallback--over-panel__link--color;
         background-color: $fallback--over-panel__link--bg-color;
         width: $fallback--over-panel__link--height;
@@ -183,8 +190,21 @@ $fallback--over-panel__cancel--svg:               "data:image/svg+xml;base64,PHN
         height: $fallback--over-panel__link--height;
         line-height: $fallback--over-panel__link--height;
         
+        border: 0;
+        
         text-align: center;
     }
+    
+    
+    .over-panel .over-panel__open:hover,
+    .over-panel .over-panel__open:active,
+    .over-panel .over-panel__open:focus,
+    .over-panel .over-panel__close:hover,
+    .over-panel .over-panel__close:active,
+    .over-panel .over-panel__close:focus {
+        border: 0;
+    }
+    
     
     /*
         Fix for Opera Mini vertical centering:
