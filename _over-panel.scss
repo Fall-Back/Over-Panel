@@ -1,17 +1,18 @@
 @charset "UTF-8";
 /*------------------------------------------------------------------------------------------------*\
     Fall-Back Over Panel Pattern v1.0.0
-    
+
     Designed for use with the basic [CSS Mustard Cut](https://github.com/Fall-Back/CSS-Mustard-Cut)
     IE 9+, FF 8+, Opera 12, [Chrome 29+, Android ~4.4+]
     Chrome 29+, Opera 16+, Safari 6.1+, iOS 7+, Android ~4.4+
+
 \*------------------------------------------------------------------------------------------------*/
 
 // Colours:
 
 // Slightly hacky way of allowing the main UI colour of this pattern to be:
 // - base-ui colour (if set)
-// - otherwise #999 
+// - otherwise #999
 // - but can be specifically overridden
 $t: #999;
 @if variable-exists(fallback--base-ui-color) {
@@ -21,25 +22,26 @@ $fallback--over-panel--ui-color:                   $t !default;
 
 
 $fallback--over-panel--bg-color:                   $fallback--over-panel--ui-color !default;
+$fallback--over-panel--color:                      #fff !default;
 
 $fallback--over-panel__link--color:                #fff !default;
 $fallback--over-panel__link--color--alt:           $fallback--over-panel__link--color !default;
 $fallback--over-panel__link--bg-color:             $fallback--over-panel--ui-color !default;
 $fallback--over-panel__link--bg-color--alt:        darken($fallback--over-panel--ui-color, 10%) !default;
 
-
-
-
+$fallback--over-panel__overlay--bg-color:          #fff !default;
 
 
 
 // Sizes:
 
-$fallback--over-panel__link--height:              ($fallback--base-em-ratio * 1.5em) !default;
-$fallback--over-panel--spacing:                   ($fallback--over-panel__link--height / 8) !default;
+$fallback--over-panel__link--height:               ($fallback--base-em-ratio * 1.5em) !default;
+$fallback--over-panel--spacing:                    ($fallback--over-panel__link--height / 8) !default;
+
 //$fallback--over-panel__link--height:               40px !default;
 //$fallback--over-panel--spacing:                    5px !default;
 
+$fallback--over-panel--padding:                     1.5rem;
 
 // Breakpoints:
 
@@ -51,51 +53,72 @@ $fallback--over-panel--breakpoint--enhanced:       45em !default;
 $fallback--over-panel--transition-duration:        ease;
 $fallback--over-panel--transition-timing-function: 0.8s;
 
+$fallback--over-panel__overlay-transition:         opacity 0.5s ease !default;
+
+
+// Other:
+$fallback--over-panel__overlay-opacity:            0.5 !default;
+$fallback--over-panel__overlay-shadow:             0 0 10px 5px #000 !default;
 
 // SVG's
 
-$fallback--over-panel__open--svg:                 "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAyMCI+PHBhdGggZmlsbD0iIzQ0NCIgZD0iTTE5LjE0MyA4SC44NTdDLjA2NyA4IDAgOC44OTQgMCAxMGMwIDEuMTA0LjA2OCAyIC44NTcgMmgxOC4yODZjLjc5IDAgLjg1Ny0uODk2Ljg1Ny0yIDAtMS4xMDctLjA2OC0yLS44NTctMnptMCA4SC44NTdDLjA2NyAxNiAwIDE2Ljg5NCAwIDE4YzAgMS4xMDUuMDY4IDIgLjg1NyAyaDE4LjI4NmMuNzkgMCAuODU3LS44OTUuODU3LTIgMC0xLjEwNi0uMDY4LTItLjg1Ny0yek0uODU3IDRoMTguMjg2Yy43OSAwIC44NTctLjg5NS44NTctMiAwLTEuMTA2LS4wNjgtMi0uODU3LTJILjg1N0MuMDY3IDAgMCAuODk0IDAgMmMwIDEuMTA1LjA2OCAyIC44NTcgMnoiLz48L3N2Zz4=" !default;
-$fallback--over-panel__cancel--svg:               "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAyMCI+PHBhdGggZmlsbD0iIzQ0NCIgZD0iTTIwIDIuMDJMMTcuOTggMCAxMCA3Ljk4IDIuMDIgMCAwIDIuMDIgNy45OCAxMCAwIDE3Ljk4IDIuMDIgMjAgMTAgMTIuMDIgMTcuOTggMjAgMjAgMTcuOTggMTIuMDIgMTAgMjAgMi4wMnoiLz48L3N2Zz4=" !default;
+//$fallback--over-panel__open--svg:                 "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAyMCI+PHBhdGggZmlsbD0iIzQ0NCIgZD0iTTE5LjE0MyA4SC44NTdDLjA2NyA4IDAgOC44OTQgMCAxMGMwIDEuMTA0LjA2OCAyIC44NTcgMmgxOC4yODZjLjc5IDAgLjg1Ny0uODk2Ljg1Ny0yIDAtMS4xMDctLjA2OC0yLS44NTctMnptMCA4SC44NTdDLjA2NyAxNiAwIDE2Ljg5NCAwIDE4YzAgMS4xMDUuMDY4IDIgLjg1NyAyaDE4LjI4NmMuNzkgMCAuODU3LS44OTUuODU3LTIgMC0xLjEwNi0uMDY4LTItLjg1Ny0yek0uODU3IDRoMTguMjg2Yy43OSAwIC44NTctLjg5NS44NTctMiAwLTEuMTA2LS4wNjgtMi0uODU3LTJILjg1N0MuMDY3IDAgMCAuODk0IDAgMmMwIDEuMTA1LjA2OCAyIC44NTcgMnoiLz48L3N2Zz4=" !default;
+//$fallback--over-panel__cancel--svg:               "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAyMCI+PHBhdGggZmlsbD0iIzQ0NCIgZD0iTTIwIDIuMDJMMTcuOTggMCAxMCA3Ljk4IDIuMDIgMCAwIDIuMDIgNy45OCAxMCAwIDE3Ljk4IDIuMDIgMjAgMTAgMTIuMDIgMTcuOTggMjAgMjAgMTcuOTggMTIuMDIgMTAgMjAgMi4wMnoiLz48L3N2Zz4=" !default;
 
 
 
 /*
     THE WAY THIS WORKS
-    
-    In browsers that support transform, the over-panel is moved 100% up, thus hiding off the top of 
-    the page. When :target-ted, the transform is set back to 0 and the transition provides the 
+
+    In browsers that support transform, the over-panel is moved 100% up, thus hiding off the top of
+    the page. When :target-ted, the transform is set back to 0 and the transition provides the
     sliding effect.
     However, Opera Mini and IE9 don't support transform (but do support Media Queries) so it breaks.
     In order to provide a functional fallback, I've set the initial clip state to 0 so that it's
     hidden. The :target-ted state sets the clip to be enormous (thus visible).
-    This, though, breaks the slide-up effect as the clip is set back to 0 before the transition 
+    This, though, breaks the slide-up effect as the clip is set back to 0 before the transition
     takes places, hiding it immediately.
-    To get round this I've also transitioned the clip (on the 'closed' state only) and set a delay 
+    To get round this I've also transitioned the clip (on the 'closed' state only) and set a delay
     so that the clip isn't change until after the slide transition has been completed.
     Since neither of these browser support transitions either, the clip delay is ignored.
-    
+
     The same principle applies to the fade effect.
 
 */
 
+.over-panel .over-panel__open,
+.over-panel .over-panel__close {
+    display: none;
+}
 
 /* -- Enhanced layout --------------------------------------------------------------------------- */
 @media only screen and (max-width: (minus1px($fallback--over-panel--breakpoint--enhanced))) {
-    
+
     /*
+        This extra wrapper allows the content of the panel to be absolutely positioned so that the
+        container doesn't create a psotioning context which would prevent the overlay from filling
+        the body.
+        The :target id needs to stay in actual position so the fall-back works, so everything
+        affected by the :target must come after or inside the element with the id, but we want to
+        allow the position of the controls to be as flexible as possible, so some trickery is
+        needed.
+
         1. Make sure the over-panel is on top. (should be a variable).
         2. Make the over-panel invisible in a way that's transition-able.
     */
-    .over-panel {
+    .over-panel__wrap {
         background-color: $fallback--over-panel--bg-color;
+        color: $fallback--over-panel--color;
         position: absolute;
         left: 0;
         top: 0;
         width: 100%;
         overflow: auto;
-     
-        z-index: 9999; /* [1] */
         
+        padding: $fallback--over-panel--padding;
+
+        z-index: 9999; /* [1] */
+
         clip: rect(0, 0, 0, 0); /* [2] */
     }
 
@@ -104,14 +127,14 @@ $fallback--over-panel__cancel--svg:               "data:image/svg+xml;base64,PHN
         1. Extremely large clip. Can't use 'auto' or transition delay won't run.
            Can't use clip-path because of support (as in - this is for older browsers anyway)
     */
-    .over-panel:target {
-        clip: rect(0, 999999px, 999999px, 0); /* [1] */ 
+    .over-panel:target .over-panel__wrap {
+        clip: rect(0, 999999px, 999999px, 0); /* [1] */
     }
-    
-    
+
+
     /* Slide effect: */
-    
-    .over-panel--slide {
+
+    .over-panel--slide .over-panel__wrap {
         -webkit-transform: translateY(-100%);
         -moz-transform:    translateY(-100%);
         -ms-transform:     translateY(-100%);
@@ -127,26 +150,26 @@ $fallback--over-panel__cancel--svg:               "data:image/svg+xml;base64,PHN
         transition:         transform $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function,
                             clip 0s $fallback--over-panel--transition-timing-function $fallback--over-panel--transition-duration;
     }
-    
-    .over-panel--slide:target {
+
+    .over-panel--slide:target .over-panel__wrap {
         -webkit-transform: translateY(0);
         -moz-transform: translateY(0);
         -ms-transform: translateY(0);
         -o-transform: translateY(0);
-        transform: translateY(0);   
-        
+        transform: translateY(0);
+
         -webkit-transition: -webkit-transform $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function;
         -moz-transition:    -moz-transform $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function;
         -o-transition:      -o-transform $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function;
         transition:         transform $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function;
     }
-    
-    
+
+
     /* Fade effect: */
-    
-    .over-panel--fade {
+
+    .over-panel--fade .over-panel__wrap {
         opacity: 0;
-        
+
         -webkit-transition: opacity $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function,
                             clip 0s $fallback--over-panel--transition-timing-function $fallback--over-panel--transition-duration;
         -moz-transition:    opacity $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function,
@@ -157,23 +180,33 @@ $fallback--over-panel__cancel--svg:               "data:image/svg+xml;base64,PHN
                             clip 0s $fallback--over-panel--transition-timing-function $fallback--over-panel--transition-duration;
 
     }
-    
-    .over-panel--fade:target {
+
+    .over-panel--fade:target .over-panel__wrap {
         opacity: 1;
-        
+
         -webkit-transition: opacity $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function;
         -moz-transition:    opacity $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function;
         -o-transition:      opacity $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function;
         transition:         opacity $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function;
-        
+
     }
-    
-    
-    
-    
-    
+
+
+    .over-panel__wrap a {
+        background-color: $fallback--over-panel__link--bg-color;
+        color: $fallback--over-panel__link--color;
+    }
+
+    .over-panel__wrap a:hover,
+    .over-panel__wrap a:active,
+    .over-panel__wrap a:focud {
+        background-color: $fallback--over-panel__link--bg-color--alt;
+        color: $fallback--over-panel__link--color--alt;
+    }
+
+
     /* Style the over-panel controls: */
-    /* 
+    /*
       NOTE: this still isn't finalised and may need to be more flexible as it's quite
       subjective how these buttons should be presented in terms of position.
       Will probably not be in isolation, but as part of a navbar or similar so this does
@@ -187,79 +220,113 @@ $fallback--over-panel__cancel--svg:               "data:image/svg+xml;base64,PHN
         color: $fallback--over-panel__link--color;
         background-color: $fallback--over-panel__link--bg-color;
         width: $fallback--over-panel__link--height;
-        
+
         display: block;
         margin: 0;
         padding: 0 ($fallback--over-panel--spacing * 2);
         height: $fallback--over-panel__link--height;
         line-height: $fallback--over-panel__link--height;
-        
+
         border: 0;
-        
+
         text-align: center;
     }
-    
-    
-    .over-panel .over-panel__open:hover,
-    .over-panel .over-panel__open:active,
-    .over-panel .over-panel__open:focus,
-    .over-panel .over-panel__close:hover,
-    .over-panel .over-panel__close:active,
-    .over-panel .over-panel__close:focus {
+
+
+    .over-panel__open.over-panel__open:hover,
+    .over-panel__open.over-panel__open:active,
+    .over-panel__open.over-panel__open:focus,
+    .over-panel__close.over-panel__close:hover,
+    .over-panel__close.over-panel__close:active,
+    .over-panel__close.over-panel__close:focus {
         border: 0;
+        color: $fallback--over-panel__link--color--alt;
+        background-color: $fallback--over-panel__link--bg-color--alt;
     }
-    
-    
+
+
     /*
         Fix for Opera Mini vertical centering:
     */
-    _:-o-prefocus, body:last-child .over-panel__open,
-    _:-o-prefocus, body:last-child .over-panel__close {
-        line-height: 2.8 !important;
-    }
-    
-    
-    
+    //_:-o-prefocus, body:last-child .over-panel__open,
+    //_:-o-prefocus, body:last-child .over-panel__close {
+    //    line-height: 2.8 !important;
+    //}
+
+
+
     /*
         1. Move the close button to the back and position behind open control.
         2. This is only necessary if the container is block wider than the control.
            May not be the best place for this, but it doesn't hurt.
     */
-    .over-panel__close {           
+    .over-panel__close {
         position: absolute; /* [1] */
         top: 0; /* [1] */
         right: 0; /* [2] */
     }
 
-    .over-panel__open:before,
-    .over-panel__close:before {
-        /* These styles are enough for modern FF to V-center the icon: */
-        display: inline-block;
-        vertical-align: middle;
-        width: $fallback--over-panel--spacing * 3;
+    //.over-panel__open:before,
+    //.over-panel__close:before {
+    //    /* These styles are enough for modern FF to V-center the icon: */
+    //    display: inline-block;
+    //    vertical-align: middle;
+    //    width: $fallback--over-panel--spacing * 3;
+    //
+    //    line-height: 0;
+    //}
 
-        line-height: 0;
+    //.over-panel__open:before {
+    //    content: url($fallback--over-panel__open--svg);
+    //}
+
+    //.over-panel__close:before {
+    //    content: url($fallback--over-panel__cancel--svg);
+    //}
+
+
+
+    //.over-panel__open:hover,
+    //.over-panel__open:active,
+    //.over-panel__open:focus,
+    //.over-panel__close:hover,
+    //.over-panel__close:active,
+    //.over-panel__close:active {
+    //    text-decoration: none;
+    //    color: $fallback--over-panel__link--color--alt;
+    //    background-color: $fallback--over-panel__link--bg-color--alt;
+    //}
+
+
+    /* Size and position the overlay, but send it to the back: */
+
+    .over-panel__overlay.over-panel__overlay {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+
+        background: $fallback--over-panel__overlay--bg-color;
+        opacity: 0;
+
+        -webkit-transition: $fallback--over-panel__overlay-transition;
+           -moz-transition: $fallback--over-panel__overlay-transition;
+             -o-transition: $fallback--over-panel__overlay-transition;
+                transition: $fallback--over-panel__overlay-transition;
+
+        -webkit-box-shadow: $fallback--over-panel__overlay-shadow;
+                box-shadow: $fallback--over-panel__overlay-shadow;
     }
 
-    .over-panel__open:before {
-        content: url($fallback--over-panel__open--svg);
-    }
-
-    .over-panel__close:before {
-        content: url($fallback--over-panel__cancel--svg);
-    }
-
-
-
-    .over-panel__open:hover,
-    .over-panel__open:active,
-    .over-panel__open:focus,
-    .over-panel__close:hover,
-    .over-panel__close:active,
-    .over-panel__close:active {
-        text-decoration: none;
-        color: $fallback--over-panel__link--color--alt;
-        background-color: $fallback--over-panel__link--bg-color--alt;
+    /* Bring the overlay to the front and fade in when there's an over-panel target: */
+    .over-panel:target .over-panel__overlay {
+        z-index: 1001; /* @var */
+        opacity: $fallback--over-panel__overlay-opacity;
     }
 }
 
