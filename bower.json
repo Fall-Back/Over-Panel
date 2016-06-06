@@ -1,13 +1,13 @@
 {
     "name": "Fall-Back-Over-Panel",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "homepage": "https://github.com/Fall-Back/Over-Panel",
     "authors": [
         "Andy Kirk <andy.kirk@gridlight-design.co.uk>"
     ],
     "description": "Reveal an over-laid panel with slide or fade effects.",
-    "main": "_search-form.scss",
-    "ignore":[],
+    "main": "over-panel.scss",
+    "ignore": [],
     "keywords": [
         "fallback",
         "css",
