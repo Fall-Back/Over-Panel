@@ -96,7 +96,7 @@ $fallback--over-panel__overlay-shadow:             0 0 10px 5px #000 !default;
 
     /*
         This extra wrapper allows the content of the panel to be absolutely positioned so that the
-        container doesn't create a psotioning context which would prevent the overlay from filling
+        container doesn't create a positioning context which would prevent the overlay from filling
         the body.
         The :target id needs to stay in actual position so the fall-back works, so everything
         affected by the :target must come after or inside the element with the id, but we want to
@@ -199,7 +199,7 @@ $fallback--over-panel__overlay-shadow:             0 0 10px 5px #000 !default;
 
     .over-panel__wrap a:hover,
     .over-panel__wrap a:active,
-    .over-panel__wrap a:focud {
+    .over-panel__wrap a:focus {
         background-color: $fallback--over-panel__link--bg-color--alt;
         color: $fallback--over-panel__link--color--alt;
     }
