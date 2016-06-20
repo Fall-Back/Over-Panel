@@ -6,9 +6,14 @@
     IE 9+, FF 8+, Opera 12, [Chrome 29+, Android ~4.4+]
     Chrome 29+, Opera 16+, Safari 6.1+, iOS 7+, Android ~4.4+
 
+    Any double-classing (e.g. `.class.class`) is deliberatly in place in order to increase specifity.
+    This allows Start-CSS declarations to be overidden.
+    E.g. `.{patten}__open.{patten}__open` overrides `a[href]`.
+
+
 \*------------------------------------------------------------------------------------------------*/
 
-// Colours:
+// Import Fall-Back vars:
 
 // Slightly hacky way of allowing the main UI colour of this pattern to be:
 // - base-ui colour (if set)
@@ -21,13 +26,24 @@ $t: #999;
 $fallback--over-panel--ui-color:                   $t !default;
 
 
+
+// Colours:
+
 $fallback--over-panel--bg-color:                   $fallback--over-panel--ui-color !default;
 $fallback--over-panel--color:                      #fff !default;
 
-$fallback--over-panel__link--color:                #fff !default;
-$fallback--over-panel__link--color--alt:           $fallback--over-panel__link--color !default;
-$fallback--over-panel__link--bg-color:             $fallback--over-panel--ui-color !default;
-$fallback--over-panel__link--bg-color--alt:        darken($fallback--over-panel--ui-color, 10%) !default;
+
+$fallback--over-panel__link--color:                lighten($fallback--over-panel--ui-color, 55%) !default;
+$fallback--over-panel__link--color--alt:           lighten($fallback--over-panel--ui-color, 35%) !default;
+$fallback--over-panel__link--bg-color:             transparent !default;
+$fallback--over-panel__link--bg-color--alt:        $fallback--over-panel--ui-color !default;
+
+
+$fallback--over-panel__control--color:             #fff !default;
+$fallback--over-panel__control--color--alt:        $fallback--over-panel__control--color !default;
+$fallback--over-panel__control--bg-color:          $fallback--over-panel--ui-color !default;
+$fallback--over-panel__control--bg-color--alt:     darken($fallback--over-panel--ui-color, 10%) !default;
+
 
 $fallback--over-panel__overlay--bg-color:          #fff !default;
 
@@ -35,13 +51,13 @@ $fallback--over-panel__overlay--bg-color:          #fff !default;
 
 // Sizes:
 
-$fallback--over-panel__link--height:               ($fallback--base-em-ratio * 1.5em) !default;
-$fallback--over-panel--spacing:                    ($fallback--over-panel__link--height / 8) !default;
+$fallback--over-panel__control--height:            ($fallback--base-em-ratio * 1.5em) !default;
+$fallback--over-panel--spacing:                    ($fallback--over-panel__control--height / 8) !default;
 
 //$fallback--over-panel__link--height:               40px !default;
 //$fallback--over-panel--spacing:                    5px !default;
 
-$fallback--over-panel--padding:                     0;
+$fallback--over-panel--padding:                    0;
 
 // Breakpoints:
 
@@ -113,8 +129,8 @@ $fallback--over-panel__overlay-shadow:             0 0 10px 5px #000 !default;
         left: 0;
         top: 0;
         width: 100%;
-        overflow: auto;
-        
+        //overflow: auto; Not sure why I needed this.
+
         padding: $fallback--over-panel--padding;
 
         z-index: 9999; /* [1] */
@@ -213,21 +229,22 @@ $fallback--over-panel__overlay-shadow:             0 0 10px 5px #000 !default;
       need some more thinking.
     */
 
+
     // Double classes to up the specificity, as the 'open' link does not have to appear inside the
     // `.over-panel` container. This is a shame and weird so re-think this
     .over-panel__open.over-panel__open,
     .over-panel__close.over-panel__close {
-        color: $fallback--over-panel__link--color;
-        background-color: $fallback--over-panel__link--bg-color;
-        width: $fallback--over-panel__link--height;
+        color: $fallback--over-panel__control--color;
+        background-color: $fallback--over-panel__control--bg-color;
+        width: $fallback--over-panel__control--height;
 
-        display: block;
         margin: 0;
         padding: 0 ($fallback--over-panel--spacing * 2);
-        height: $fallback--over-panel__link--height;
-        line-height: $fallback--over-panel__link--height;
+        height: $fallback--over-panel__control--height;
+        line-height: $fallback--over-panel__control--height;
 
         border: 0;
+        text-decoration: none;
 
         text-align: center;
     }
@@ -240,10 +257,14 @@ $fallback--over-panel__overlay-shadow:             0 0 10px 5px #000 !default;
     .over-panel__close.over-panel__close:active,
     .over-panel__close.over-panel__close:focus {
         border: 0;
-        color: $fallback--over-panel__link--color--alt;
-        background-color: $fallback--over-panel__link--bg-color--alt;
+        text-decoration: none;
+        color: $fallback--over-panel__control--color--alt;
+        background-color: $fallback--over-panel__control--bg-color--alt;
     }
 
+    .over-panel__open.over-panel__open {
+        display: block;
+    }
 
     /*
         Fix for Opera Mini vertical centering:
@@ -252,56 +273,27 @@ $fallback--over-panel__overlay-shadow:             0 0 10px 5px #000 !default;
     //_:-o-prefocus, body:last-child .over-panel__close {
     //    line-height: 2.8 !important;
     //}
-
-
-
-    /*
-        1. Move the close button to the back and position behind open control.
-        2. This is only necessary if the container is block wider than the control.
-           May not be the best place for this, but it doesn't hurt.
-    */
-    .over-panel__close {
-        position: absolute; /* [1] */
-        top: 0; /* [1] */
-        right: 0; /* [2] */
+    
+    /* Hide the open control: */
+    .over-panel:target .over-panel__open.over-panel__open {
+        display: none;
     }
 
-    //.over-panel__open:before,
-    //.over-panel__close:before {
-    //    /* These styles are enough for modern FF to V-center the icon: */
-    //    display: inline-block;
-    //    vertical-align: middle;
-    //    width: $fallback--over-panel--spacing * 3;
-    //
-    //    line-height: 0;
-    //}
+    /* Show the close control and move on above the overlay: */
+    .over-panel:target .over-panel__close.over-panel__close {
+        z-index: 1002; /* @var */
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
 
-    //.over-panel__open:before {
-    //    content: url($fallback--over-panel__open--svg);
-    //}
-
-    //.over-panel__close:before {
-    //    content: url($fallback--over-panel__cancel--svg);
-    //}
-
-
-
-    //.over-panel__open:hover,
-    //.over-panel__open:active,
-    //.over-panel__open:focus,
-    //.over-panel__close:hover,
-    //.over-panel__close:active,
-    //.over-panel__close:active {
-    //    text-decoration: none;
-    //    color: $fallback--over-panel__link--color--alt;
-    //    background-color: $fallback--over-panel__link--bg-color--alt;
-    //}
 
 
     /* Size and position the overlay, but send it to the back: */
 
     .over-panel__overlay.over-panel__overlay {
-        content: "";
+        display: block;
         position: absolute;
         z-index: -1;
         left: 0;
@@ -310,6 +302,11 @@ $fallback--over-panel__overlay-shadow:             0 0 10px 5px #000 !default;
         bottom: 0;
         width: 100%;
         height: 100%;
+        padding: 0;
+        margin: 0;
+        border: 0;
+        text-decoration: none;
+
 
         background: $fallback--over-panel__overlay--bg-color;
         opacity: 0;
@@ -327,6 +324,14 @@ $fallback--over-panel__overlay-shadow:             0 0 10px 5px #000 !default;
     .over-panel:target .over-panel__overlay {
         z-index: 1001; /* @var */
         opacity: $fallback--over-panel__overlay-opacity;
+    }
+
+    .over-panel__overlay.over-panel__overlay:hover,
+    .over-panel__overlay.over-panel__overlay:active,
+    .over-panel__overlay.over-panel__overlay:focus {
+        border: 0;
+        text-decoration: none;
+        background: $fallback--over-panel__overlay--bg-color;
     }
 }
 
