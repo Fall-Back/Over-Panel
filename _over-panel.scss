@@ -10,21 +10,22 @@
     This allows Start-CSS declarations to be overidden.
     E.g. `.{patten}__open.{patten}__open` overrides `a[href]`.
 
-
 \*------------------------------------------------------------------------------------------------*/
 
-// Import Fall-Back vars:
+/*------------------------------------------------------------------------------------------------*\
+    Import Fall-Back vars:
 
-// Slightly hacky way of allowing the main UI colour of this pattern to be:
-// - base-ui colour (if set)
-// - otherwise #999
-// - but can be specifically overridden
+    Slightly hacky way of allowing the main UI colour of this pattern to be:
+     - base-ui colour (if set)
+     - otherwise #999
+     - but can be specifically overridden
+\*------------------------------------------------------------------------------------------------*/
 $t: #999;
 @if variable-exists(fallback--base-ui-color) {
     $t: $fallback--base-ui-color;
 }
 $fallback--over-panel--ui-color:                   $t !default;
-
+/*------------------------------------------------------------------------------------------------*/
 
 
 // Colours:
