@@ -25,6 +25,13 @@ $t: #999;
     $t: $fallback--base-ui-color;
 }
 $fallback--over-panel--ui-color:                   $t !default;
+
+// Same thing for the breakpoint:
+$t: 50em;
+@if variable-exists(fallback--breakpoint--enhanced) {
+    $t: $fallback--breakpoint--enhanced;
+}
+$fallback--over-panel--breakpoint--enhanced: $t !default;
 /*------------------------------------------------------------------------------------------------*/
 
 
@@ -59,11 +66,6 @@ $fallback--over-panel--spacing:                    ($fallback--over-panel__contr
 //$fallback--over-panel--spacing:                    5px !default;
 
 $fallback--over-panel--padding:                    0;
-
-// Breakpoints:
-
-$fallback--over-panel--breakpoint--enhanced:       50em !default;
-//$fallback--over-panel--breakpoint--enhanced:       720px !default;
 
 
 // Transitons:
