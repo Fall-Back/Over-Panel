@@ -276,9 +276,14 @@ $fallback--over-panel__overlay-shadow:             0 0 10px 5px #000 !default;
     //}
 
     /* Hide the open control: */
-    .over-panel:target .over-panel__open.over-panel__open {
+    /*
+        Taking this out for now is leaving it visible doesn't seem to hurt (though accessiblity?)
+        but hiding it can cause other elements to jump around due to flexbox.
+        Maybe use visibility, not sure.
+    */
+    /*.over-panel:target .over-panel__open.over-panel__open {
         display: none;
-    }
+    }*/
 
     /* Show the close control and move on above the overlay: */
     .over-panel:target .over-panel__close.over-panel__close {
