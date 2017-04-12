@@ -123,7 +123,8 @@ $fallback--over-panel__overlay-shadow:             0 0 10px 5px #000 !default;
         needed.
 
         1. Make sure the over-panel is on top. (should be a variable).
-        2. Make the over-panel invisible in a way that's transition-able.
+        2. Make the over-panel invisible in a way that's transition-able but also removes from tab
+           order.
     */
     .over-panel__wrap {
         background-color: $fallback--over-panel--bg-color;
@@ -138,36 +139,35 @@ $fallback--over-panel__overlay-shadow:             0 0 10px 5px #000 !default;
 
         z-index: 9999; /* [1] */
 
-        clip: rect(0, 0, 0, 0); /* [2] */
+        visibility: hidden; /* [2] */
     }
 
 
     /*
-        1. Extremely large clip. Can't use 'auto' or transition delay won't run.
-           Can't use clip-path because of support (as in - this is for older browsers anyway)
+        1. Make the over-panel visible in a way that's transition-able.
     */
     .over-panel:target .over-panel__wrap {
-        clip: rect(0, 999999px, 999999px, 0); /* [1] */
+        visibility: visible; /* [1] */        
     }
 
 
     /* Slide effect: */
 
-    .over-panel--slide .over-panel__wrap {
+    .over-panel--slide .over-panel__wrap {    
         -webkit-transform: translateY(-100%);
         -moz-transform:    translateY(-100%);
         -ms-transform:     translateY(-100%);
         -o-transform:      translateY(-100%);
         transform:         translateY(-100%);
-
+        
         -webkit-transition: -webkit-transform $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function,
-                            clip 0s $fallback--over-panel--transition-timing-function $fallback--over-panel--transition-duration;
+                            visibility 0s $fallback--over-panel--transition-timing-function $fallback--over-panel--transition-duration;
         -moz-transition:    -moz-transform $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function,
-                            clip 0s $fallback--over-panel--transition-timing-function $fallback--over-panel--transition-duration;
+                            visibility 0s $fallback--over-panel--transition-timing-function $fallback--over-panel--transition-duration;
         -o-transition:      -o-transform $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function,
-                            clip 0s $fallback--over-panel--transition-timing-function $fallback--over-panel--transition-duration;
+                            visibility 0s $fallback--over-panel--transition-timing-function $fallback--over-panel--transition-duration;
         transition:         transform $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function,
-                            clip 0s $fallback--over-panel--transition-timing-function $fallback--over-panel--transition-duration;
+                            visibility 0s $fallback--over-panel--transition-timing-function $fallback--over-panel--transition-duration;
     }
 
     .over-panel--slide:target .over-panel__wrap {
@@ -186,30 +186,29 @@ $fallback--over-panel__overlay-shadow:             0 0 10px 5px #000 !default;
 
     /* Fade effect: */
 
-    .over-panel--fade .over-panel__wrap {
+    .over-panel--fade .over-panel__wrap {    
         opacity: 0;
-
+        visibility: hidden;
+        
         -webkit-transition: opacity $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function,
-                            clip 0s $fallback--over-panel--transition-timing-function $fallback--over-panel--transition-duration;
+                            visibility 0s $fallback--over-panel--transition-timing-function $fallback--over-panel--transition-duration;
         -moz-transition:    opacity $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function,
-                            clip 0s $fallback--over-panel--transition-timing-function $fallback--over-panel--transition-duration;
+                            visibility 0s $fallback--over-panel--transition-timing-function $fallback--over-panel--transition-duration;
         -o-transition:      opacity $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function,
-                            clip 0s $fallback--over-panel--transition-timing-function $fallback--over-panel--transition-duration;
+                            visibility 0s $fallback--over-panel--transition-timing-function $fallback--over-panel--transition-duration;
         transition:         opacity $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function,
-                            clip 0s $fallback--over-panel--transition-timing-function $fallback--over-panel--transition-duration;
-
+                            visibility 0s $fallback--over-panel--transition-timing-function $fallback--over-panel--transition-duration;
     }
 
     .over-panel--fade:target .over-panel__wrap {
         opacity: 1;
+        visibility: visible;
 
         -webkit-transition: opacity $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function;
         -moz-transition:    opacity $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function;
         -o-transition:      opacity $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function;
         transition:         opacity $fallback--over-panel--transition-duration $fallback--over-panel--transition-timing-function;
-
     }
-
 
     .over-panel__wrap a {
         background-color: $fallback--over-panel__link--bg-color;
