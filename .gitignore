@@ -2,4 +2,6 @@
 bower_components/
 over-panel.css
 over-panel.scss
+over-panel-next.css
+over-panel-next.scss
 *.css.map
