@@ -47,7 +47,7 @@ $fallback--breakpoint--enhanced:   50em !default;
 |-------------------------------------------------------------------------------------------------*/
 
 $fallback--over-panel--breakpoint--enhanced:            $fallback--breakpoint--enhanced !default;
-
+$fallback--over-panel--z-index:               		    9999 !default;
 
 // Colours:
 
@@ -96,6 +96,7 @@ $fallback--over-panel__overlay-transition:              opacity 0.5s ease !defau
 // Other:
 $fallback--over-panel__overlay-opacity:                 0.5 !default;
 $fallback--over-panel__overlay-shadow:                  0 0 10px 5px #000 !default;
+
 
 
 
@@ -167,6 +168,15 @@ $fallback--over-panel__overlay-shadow:                  0 0 10px 5px #000 !defau
     //@media only screen and (max-width: (minus1px($fallback--over-panel--breakpoint--enhanced))) {
     @media only screen and (max-width: $fallback--over-panel--breakpoint--enhanced) {
 
+		/*
+			1. Make sure the over-panel is on top.
+		*/
+		.js-over-panel-control.over-panel {
+			position: absolute; /* [1] */
+			z-index: $fallback--over-panel--z-index; /* [1] */
+		}
+		
+		
         .js-over-panel-control.over-panel-control {
             display: inline-block;
         }
@@ -181,8 +191,8 @@ $fallback--over-panel__overlay-shadow:                  0 0 10px 5px #000 !defau
             allow the position of the controls to be as flexible as possible, so some trickery is
             needed.
 
-            1. Make sure the over-panel is on top. (should be a variable).
-            2. Make the over-panel invisible in a way that's transition-able but also removes from tab
+            
+            1. Make the over-panel invisible in a way that's transition-able but also removes from tab
                order.
         */
         .js-over-panel .over-panel__contents {
@@ -193,9 +203,9 @@ $fallback--over-panel__overlay-shadow:                  0 0 10px 5px #000 !defau
             width: 100%;
             //overflow: auto; Not sure why I needed this.          
 
-            z-index: 9999; /* [1] */
+            
 
-            visibility: hidden; /* [2] */
+            visibility: hidden; /* [1] */
         }
 
 
@@ -276,11 +286,12 @@ $fallback--over-panel__overlay-shadow:                  0 0 10px 5px #000 !defau
         /*
             1. These override button styles defined as part of StartCSS. I may consider making these
                customisable via more variables.
+			2. Ensure the control is above the overlay.
         */
         .js-over-panel-control.over-panel-control {
             display: block;
             margin: 0;
-            //padding: ($fallback--nav-bar--spacing * 1.333333) ($fallback--nav-bar--spacing * 2);
+
             padding-left: $fallback--over-panel--spacing * 2;
             padding-right: $fallback--over-panel--spacing * 2;
             padding-bottom: 0; /* 1 */
@@ -288,7 +299,7 @@ $fallback--over-panel__overlay-shadow:                  0 0 10px 5px #000 !defau
 
             border: 0;
             border-radius: $fallback--over-panel__control--border-radius;
-            //height: $fallback--nav-bar--height;
+
             line-height: $fallback--over-panel__control--height;
 
             text-decoration: none;
@@ -298,6 +309,8 @@ $fallback--over-panel__overlay-shadow:                  0 0 10px 5px #000 !defau
 
             color: $fallback--over-panel__control--color;
             background-color: $fallback--over-panel__control--background-color;
+			
+			z-index: 1; /* [2] */
         }
 
 
@@ -321,7 +334,15 @@ $fallback--over-panel__overlay-shadow:                  0 0 10px 5px #000 !defau
             background-color: $fallback--over-panel__control--background-color--alt2;
         }
 
+		.js-over-panel-control.over-panel-control .icon--is-open,
+        .js-over-panel-control.over-panel-control[aria-expanded="true"] .icon--is-closed {
+            display: none;
+        }
 
+        .js-over-panel-control.over-panel-control .icon--is-closed,
+        .js-over-panel-control.over-panel-control[aria-expanded="true"] .icon--is-open {
+            display: inline;
+        }
 
 
         /*.over-panel__open.over-panel__open {
@@ -357,11 +378,7 @@ $fallback--over-panel__overlay-shadow:                  0 0 10px 5px #000 !defau
             right: 0;
         }*/
 
-
-
-        /* Size and position the overlay, but send it to the back: */
-
-        .js-over-panel-control .over-panel__overlay {
+        .js-over-panel .over-panel__overlay {
             display: block;
             position: absolute;
             z-index: -1;
@@ -390,10 +407,10 @@ $fallback--over-panel__overlay-shadow:                  0 0 10px 5px #000 !defau
         }
 
         /* Bring the overlay to the front and fade in when there's an over-panel target: */
-        /*.js-over-panel_is-open .over-panel__overlay {
-            z-index: 1001; /* @var *
+        .js-over-panel_is-open .over-panel__overlay {
+			z-index: 0;
             opacity: $fallback--over-panel__overlay-opacity;
-        }*/
+        }
 
         .js-over-panel-control .over-panel__overlay:hover,
         .js-over-panel-control .over-panel__overlay:active,

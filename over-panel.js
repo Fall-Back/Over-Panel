@@ -59,6 +59,7 @@
                     // Find corresponding controls:
                     var over_panel_id = over_panel.getAttribute('id');
                     var over_panel_control = document.querySelector('[aria-controls="' + over_panel_id + '"]');
+                    var over_panel_overlay = over_panel.querySelector('.over-panel__overlay');
 
                     // Check we've got a corresponding control. If not we can't proceed so skip:
                     if (!over_panel_control) {
@@ -108,17 +109,14 @@
                                 over_panel.className = over_panel.className.replace(new RegExp('(^|\\b)' + over_panel_is_open_classname.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
                             }
                         }
-
-                        // Set the focus to the first link if submenu newly opened:
-                        /*if (!expanded) {
-                        var first_link = document.querySelector('#' + button_id + '--target .subnav__link');
-                        first_link.focus();
-                        }*/
-
                     });
+					
+					// Overlay click action:
+					over_panel_overlay.addEventListener('click', function() {
+						over_panel_control.click()
+					});
 
                     // Remove `animating` class at transition end.
-
                     transitionEvent && over_panel.addEventListener(transitionEvent, function() {
                         if (over_panel.classList) {
                             over_panel.classList.remove(over_panel_is_animating_classname);
@@ -151,50 +149,6 @@
                             last_link.focus();
                         }
                     });
-                    
-                    /*first_link.addEventListener('keydown', function(e) {
-                        if (e.keyCode === 9) {
-                            if (e.shiftKey) {
-                                e.preventDefault();
-                                over_panel_control.focus();
-                            }
-                        }
-                    });*/
-
-                    // If the menu is visible, always TAB into it from the menu button
-                    /*over_panel_control.addEventListener('keydown', function(e) {
-                        if (e.keyCode === 9) {
-                            if (this.getAttribute('aria-expanded') == 'true') {
-                                if (!e.shiftKey) {
-                                    e.preventDefault();
-                                    first_link.focus();
-                                }
-                            }/* else {
-                                if (e.shiftKey) {
-                                    e.preventDefault();
-                                    first_link.focus();
-                                }
-                            }*
-                        }
-                    });*/
-                    
-                    
-                    /*
-                    $('[aria-expanded]').on('keydown', function(e) {
-                      if (e.keyCode === 9) {
-                        if ($(this).attr('aria-expanded') == 'true') {
-                          if (!e.shiftKey) {
-                            e.preventDefault();
-                            $('#navigation li:first-child a').focus();
-                          } else {
-                            if (e.shiftKey) {
-                              e.preventDefault();
-                              $('.content').focus();
-                            }
-                          }
-                        }
-                      }
-                    });*/
                 });
             }
         }
