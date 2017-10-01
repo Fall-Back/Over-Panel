@@ -130,12 +130,12 @@
                     // Focus trap inspired by:
 					// http://heydonworks.com/practical_aria_examples/progressive-hamburger.html
                     var over_panel_contents = over_panel.querySelector('.over-panel__contents');
-                    var links               = over_panel_contents.querySelectorAll('a');
-                    var first_link          = links[0];
-                    var last_link           = links[links.length - 1];
+                    var focusables          = over_panel_contents.querySelectorAll('a, button, input, select, textarea');
+                    var first_focusable     = focusables[0];
+                    var last_focusable      = focusables[focusables.length - 1];
                     
                     // At end of navigation block, return focus to navigation menu button                   
-                    last_link.addEventListener('keydown', function(e) {
+                    last_focusable.addEventListener('keydown', function(e) {
                         if (e.keyCode === 9 && !e.shiftKey) {
 							e.preventDefault();
 							over_panel_control.focus();
@@ -146,7 +146,7 @@
                     over_panel_control.addEventListener('keydown', function(e) {
                         if (over_panel_control.getAttribute('aria-expanded') == 'true' && e.keyCode === 9 && e.shiftKey) {
                             e.preventDefault();
-                            last_link.focus();
+                            last_focusable.focus();
                         }
                     });
                 });
