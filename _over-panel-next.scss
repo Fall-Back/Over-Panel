@@ -47,7 +47,7 @@ $fallback--breakpoint--enhanced:   50em !default;
 |-------------------------------------------------------------------------------------------------*/
 
 $fallback--over-panel--breakpoint--enhanced:            $fallback--breakpoint--enhanced !default;
-$fallback--over-panel--z-index:               		    9999 !default;
+////$fallback--over-panel--z-index:               		    9999 !default;
 
 // Colours:
 
@@ -97,9 +97,6 @@ $fallback--over-panel__overlay-transition:              opacity 0.5s ease !defau
 $fallback--over-panel__overlay-opacity:                 0.5 !default;
 $fallback--over-panel__overlay-shadow:                  0 0 10px 5px #000 !default;
 
-
-
-
 /*
     THE WAY THIS WORKS
 
@@ -120,6 +117,14 @@ $fallback--over-panel__overlay-shadow:                  0 0 10px 5px #000 !defau
 */
 /* -- Basic/fallback layout --------------------------------------------------------------------- */
 
+        /*
+            1. Helps compatibiliy with Nav-Bar. No down-sides I can see. May have to revise if some
+               become apparent.
+        */
+        .js-over-panel.over-panel {
+            width: 100%; /* [1] */
+        }
+        
 	/*
 		This is a bit of a hack, but it's a way of letting JS know that this CSS has loaded.
 		It doesn't work for Opera Mini, but I'm happy to provide this browser only with the
@@ -130,12 +135,12 @@ $fallback--over-panel__overlay-shadow:                  0 0 10px 5px #000 !defau
         display: none;
 	}
 
+
     .over-panel-control {
         display: none;
     }
-    
-    
-    
+
+
     // Not 100% sure about this.
     // May consider removing this, or making the whole section optional if user doesn't want to use:
     .over-panel__contents {
@@ -143,7 +148,7 @@ $fallback--over-panel__overlay-shadow:                  0 0 10px 5px #000 !defau
         color: $fallback--over-panel__contents--text-color;
         padding: $fallback--over-panel__contents--padding;
     }
-    
+
     .over-panel__contents a {
         color: $fallback--over-panel__contents--link-color;
     }
@@ -153,8 +158,6 @@ $fallback--over-panel__overlay-shadow:                  0 0 10px 5px #000 !defau
     .over-panel__contents a:focus {
         color: $fallback--over-panel__contents--link-color--alt;
     }
-
-    
 
 /* -----------------------------------------------------------------------------------------------*/
 
@@ -168,15 +171,23 @@ $fallback--over-panel__overlay-shadow:                  0 0 10px 5px #000 !defau
     //@media only screen and (max-width: (minus1px($fallback--over-panel--breakpoint--enhanced))) {
     @media only screen and (max-width: $fallback--over-panel--breakpoint--enhanced) {
 
+        /*
+            1. Helps compatibiliy with Nav-Bar. No down-sides I can see. May have to revise if some
+               become apparent.
+        */
+        .js-over-panel.over-panel {
+            position: relative; /* [1] */
+        }
+    
 		/*
 			1. Make sure the over-panel is on top.
 		*/
-		.js-over-panel-control.over-panel {
+		.js-over-panel.over-panel {
 			position: absolute; /* [1] */
-			z-index: $fallback--over-panel--z-index; /* [1] */
+			////z-index: $fallback--over-panel--z-index; /* [1] */
 		}
-		
-		
+
+
         .js-over-panel-control.over-panel-control {
             display: inline-block;
         }
@@ -191,19 +202,19 @@ $fallback--over-panel__overlay-shadow:                  0 0 10px 5px #000 !defau
             allow the position of the controls to be as flexible as possible, so some trickery is
             needed.
 
-            
+
             1. Make the over-panel invisible in a way that's transition-able but also removes from tab
                order.
         */
         .js-over-panel .over-panel__contents {
-            
+
             position: absolute;
             left: 0;
             top: 0;
             width: 100%;
-            //overflow: auto; Not sure why I needed this.          
+            //overflow: auto; Not sure why I needed this.
 
-            
+
 
             visibility: hidden; /* [1] */
         }
@@ -220,7 +231,7 @@ $fallback--over-panel__overlay-shadow:                  0 0 10px 5px #000 !defau
         // Variable aliases for ease of comprehension:
         $td: $fallback--over-panel--transition-duration;
         $tf: $fallback--over-panel--transition-timing-function;
-        
+
         /* Slide effect: */
 
         .over-panel--slide .over-panel__contents {
@@ -230,7 +241,7 @@ $fallback--over-panel__overlay-shadow:                  0 0 10px 5px #000 !defau
             -o-transform:      translateY(-100%);
             transform:         translateY(-100%);
         }
-         
+
         .js-over-panel_is-animating.over-panel--slide .over-panel__contents {
             -webkit-transition: -webkit-transform $td  $tf,
                                 visibility        0s   $tf  $td;
@@ -261,7 +272,7 @@ $fallback--over-panel__overlay-shadow:                  0 0 10px 5px #000 !defau
         .over-panel--fade .over-panel__contents {
             opacity: 0;
         }
-        
+
         .js-over-panel_is-animating.over-panel--fade .over-panel__contents {
             -webkit-transition: opacity    $td  $tf,
                                 visibility 0s   $tf  $td;
@@ -281,7 +292,7 @@ $fallback--over-panel__overlay-shadow:                  0 0 10px 5px #000 !defau
             -o-transition:      opacity $td  $tf;
             transition:         opacity $td  $tf;
         }
-        
+
 
         /*
             1. These override button styles defined as part of StartCSS. I may consider making these
@@ -309,7 +320,7 @@ $fallback--over-panel__overlay-shadow:                  0 0 10px 5px #000 !defau
 
             color: $fallback--over-panel__control--color;
             background-color: $fallback--over-panel__control--background-color;
-			
+
 			z-index: 1; /* [2] */
         }
 
@@ -380,7 +391,7 @@ $fallback--over-panel__overlay-shadow:                  0 0 10px 5px #000 !defau
 
         .js-over-panel .over-panel__overlay {
             display: block;
-            position: absolute;
+            position: fixed;
             z-index: -1;
             left: 0;
             top: 0;
