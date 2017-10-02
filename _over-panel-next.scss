@@ -213,7 +213,7 @@ $fallback--over-panel__overlay-shadow:                  0 0 10px 5px #000 !defau
 
             position: absolute;
             left: 0;
-            top: 0;
+            top: $fallback--over-panel__control--height;
             width: 100%;
             //overflow: auto; Not sure why I needed this.
 
