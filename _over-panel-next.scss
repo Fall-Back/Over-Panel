@@ -404,6 +404,8 @@ $fallback--over-panel__overlay-shadow:                  0 0 10px 5px #000 !defau
             margin: 0;
             border: 0;
             text-decoration: none;
+            
+            visibility: hidden; 
 
 
             background: $fallback--over-panel__overlay--background-color;
@@ -422,6 +424,8 @@ $fallback--over-panel__overlay-shadow:                  0 0 10px 5px #000 !defau
         .js-over-panel_is-open .over-panel__overlay {
 			z-index: 0;
             opacity: $fallback--over-panel__overlay-opacity;
+            
+            visibility: visible; 
         }
 
         .js-over-panel-control .over-panel__overlay:hover,
