@@ -30,6 +30,7 @@ $fallback--root-font-size-percent: ($fallback--root-font-size / 16px) * 100;
 $fallback--base-rem-space-unit:    ($fallback--base-line-height / $fallback--root-font-size) * 1rem;
 $fallback--base-rem-1px:           1px / $fallback--root-font-size * 1rem;
 $fallback--base-em-1px:            1px / $fallback--root-font-size * 1em;
+$fallback--mq-1-em-px:             0.0625em;
 
 $fallback--base-font-family:       sans-serif !default;
 // Consider:
@@ -166,7 +167,7 @@ $fallback--over-panel__overlay-shadow:                  0 0 10px 5px #000 !defau
 
 /* ********************************************************************************************** */
 /* -- Enhanced layout --------------------------------------------------------------------------- */
-    @media only screen and (max-width: ($fallback--over-panel--breakpoint--enhanced - $fallback--base-em-1px)) {
+    @media only screen and (max-width: ($fallback--over-panel--breakpoint--enhanced - $fallback--mq-1-em-px)) {
 
         /*
             1. Helps compatibiliy with Nav-Bar. No down-sides I can see. May have to revise if some
