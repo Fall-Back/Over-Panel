@@ -91,6 +91,13 @@
 
                         // Invert the `aria-expanded` attribute:
                         var expanded = this.getAttribute('aria-expanded') === 'true' || false;
+                        
+                        // Close any open panels:
+                        var expanded_buttons = document.querySelectorAll('.js-over-panel-control[aria-expanded="true"]');
+                        Array.prototype.forEach.call(expanded_buttons, function(expanded_button, i) {
+                            //expanded_button.setAttribute('aria-expanded', 'false');
+                            expanded_button.click();
+                        });
 
                         // Set the attribute:
                         this.setAttribute('aria-expanded', !expanded);
