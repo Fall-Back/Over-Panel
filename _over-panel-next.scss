@@ -10,10 +10,10 @@
     Chrome 29+, Opera 16+, Safari 6.1+, iOS 7+, Android ~4.4+
 
 
-    Any double-classing (e.g. `.class.class`) is deliberate and intended to increase specifity.
-    This allows any applicable Start-CSS declarations to be overidden.
+    Any double-classing (e.g. `.class.class`) is deliberate and intended to increase specificity.
+    This allows any applicable Start-CSS declarations to be overridden.
     E.g. `.{pattern} .{pattern}__child` would `a[href]`, but just `.{pattern}` wouldn't, so we use
-    `.{pattern}.{pattren}`
+    `.{pattern}.{pattern}`
 
 |-------------------------------------------------------------------------------------------------*/
 
