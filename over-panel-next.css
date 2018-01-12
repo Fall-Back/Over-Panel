@@ -11,12 +11,13 @@
 
 
     Any double-classing (e.g. `.class.class`) is deliberate and intended to increase specifity.
-    This allows Start-CSS declarations to be overidden.
-    E.g. `.{pattern}__open.{pattren}__open` overrides `a[href]`.
+    This allows any applicable Start-CSS declarations to be overidden.
+    E.g. `.{pattern} .{pattern}__child` would `a[href]`, but just `.{pattern}` wouldn't, so we use
+    `.{pattern}.{pattren}`
 
 |-------------------------------------------------------------------------------------------------*/
 /*-------------------------------------------------------------------------------------------------|
-    Fall-Back Over Panel Pattern v2.0.0
+    Fall-Back Over Panel Pattern v2.0.0 (Next)
 |-------------------------------------------------------------------------------------------------*/
 /*
     THE WAY THIS WORKS
@@ -38,10 +39,18 @@
 */
 /* -- Basic/fallback layout --------------------------------------------------------------------- */
 /*
-		This is a bit of a hack, but it's a way of letting JS know that this CSS has loaded.
-		It doesn't work for Opera Mini, but I'm happy to provide this browser only with the
-		unenhanced version.
-	*/
+        1. Helps compatibiliy with Nav-Bar. No down-sides I can see. May have to revise if some
+           become apparent.
+    */
+.over-panel {
+  width: 100%;
+  /* [1] */ }
+
+/*
+            This is a bit of a hack, but it's a way of letting JS know that this CSS has loaded.
+            It doesn't work for Opera Mini, but I'm happy to provide this browser only with the
+            unenhanced version.
+        */
 .over-panel::before {
   content: 'CSS Loaded';
   display: none; }
@@ -65,15 +74,20 @@
 /* -----------------------------------------------------------------------------------------------*/
 /* ********************************************************************************************** */
 /* -- Enhanced layout --------------------------------------------------------------------------- */
-@media only screen and (max-width: 50em) {
+@media only screen and (max-width: 49.9375em) {
+  /*
+            1. Helps compatibiliy with Nav-Bar. No down-sides I can see. May have to revise if some
+               become apparent.
+        */
   /*
 			1. Make sure the over-panel is on top.
 		*/
-  .js-over-panel-control.over-panel {
+  .js-over-panel.over-panel {
     position: absolute;
     /* [1] */
-    z-index: 9999;
-    /* [1] */ }
+    left: 0;
+    top: 0;
+    width: 100%; }
   .js-over-panel-control.over-panel-control {
     display: inline-block; }
   /*
@@ -85,14 +99,14 @@
             allow the position of the controls to be as flexible as possible, so some trickery is
             needed.
 
-            
+
             1. Make the over-panel invisible in a way that's transition-able but also removes from tab
                order.
         */
   .js-over-panel .over-panel__contents {
     position: absolute;
     left: 0;
-    top: 0;
+    top: 2.25em;
     width: 100%;
     visibility: hidden;
     /* [1] */ }
@@ -103,7 +117,7 @@
     visibility: visible;
     /* [1] */ }
   /* Slide effect: */
-  .over-panel--slide .over-panel__contents {
+  .js-over-panel.over-panel--slide .over-panel__contents {
     -webkit-transform: translateY(-100%);
     -moz-transform: translateY(-100%);
     -ms-transform: translateY(-100%);
@@ -125,7 +139,7 @@
     -o-transition: -o-transform ease 0.8s;
     transition: transform ease 0.8s; }
   /* Fade effect: */
-  .over-panel--fade .over-panel__contents {
+  .js-over-panel.over-panel--fade .over-panel__contents {
     opacity: 0; }
   .js-over-panel_is-animating.over-panel--fade .over-panel__contents {
     -webkit-transition: opacity ease 0.8s, visibility 0s 0.8s ease;
@@ -189,7 +203,7 @@
         */
   /* Hide the open control: */
   /*
-            Taking this out for now is leaving it visible doesn't seem to hurt (though accessiblity?)
+            Taking this out for now is leaving it visible doesn't seem to hurt (though accessibility?)
             but hiding it can cause other elements to jump around due to flexbox.
             Maybe use visibility, not sure.
         */
@@ -206,7 +220,7 @@
         }*/
   .js-over-panel .over-panel__overlay {
     display: block;
-    position: absolute;
+    position: fixed;
     z-index: -1;
     left: 0;
     top: 0;
@@ -218,6 +232,7 @@
     margin: 0;
     border: 0;
     text-decoration: none;
+    visibility: hidden;
     background: #fff;
     opacity: 0;
     -webkit-transition: opacity 0.5s ease;
@@ -229,7 +244,8 @@
   /* Bring the overlay to the front and fade in when there's an over-panel target: */
   .js-over-panel_is-open .over-panel__overlay {
     z-index: 0;
-    opacity: 0.5; }
+    opacity: 0.5;
+    visibility: visible; }
   .js-over-panel-control .over-panel__overlay:hover,
   .js-over-panel-control .over-panel__overlay:active,
   .js-over-panel-control .over-panel__overlay:focus {
