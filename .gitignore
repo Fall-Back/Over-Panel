@@ -1,3 +1,5 @@
 .sass-cache/
 bower_components/
 *.css.map
+_over-panel-next.scss
+_over-panel-next.css
