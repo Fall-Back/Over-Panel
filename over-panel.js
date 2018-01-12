@@ -1,4 +1,4 @@
-/*! TEST
+/*!
     Fall-Back Over-Panel v2.0.0
     https://github.com/Fall-Back/Over-Panel
     Copyright (c) 2017, Andy Kirk
