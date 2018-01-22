@@ -61,7 +61,7 @@
 	var over_panel = {
 
         init: function() {
-            var over_panels = document.querySelectorAll('.over-panel');
+            var over_panels = document.querySelectorAll('[data-js="over-panel"]');
             /*var over_panel_js_classname           = 'js-over-panel';
             var over_panel_control_js_classname   = 'js-over-panel-control';
             var over_panel_is_open_classname      = 'js-over-panel_is-open';
@@ -85,7 +85,7 @@
                     // Find corresponding controls:
                     var over_panel_id = over_panel.getAttribute('id');
                     var over_panel_control = document.querySelector('[aria-controls="' + over_panel_id + '"]');
-                    var over_panel_overlay = over_panel.querySelector('.over-panel__overlay');
+                    var over_panel_overlay = over_panel.querySelector('[data-js="over-panel__overlay"]');
 
                     // Check we've got a corresponding control. If not we can't proceed so skip:
                     if (!over_panel_control) {
@@ -119,7 +119,7 @@
                         var expanded = this.getAttribute('aria-expanded') === 'true' || false;
                         
                         // Close any open panels:
-                        var expanded_buttons = document.querySelectorAll('.js-over-panel-control[aria-expanded="true"]');
+                        var expanded_buttons = document.querySelectorAll('[data-js="overpanel__control"][aria-expanded="true"]');
                         Array.prototype.forEach.call(expanded_buttons, function(expanded_button, i) {
                             //expanded_button.setAttribute('aria-expanded', 'false');
                             expanded_button.click();
@@ -161,7 +161,7 @@
 
                     // Focus trap inspired by:
 					// http://heydonworks.com/practical_aria_examples/progressive-hamburger.html
-                    var over_panel_contents = over_panel.querySelector('.over-panel__contents');
+                    var over_panel_contents = over_panel.querySelector('[data-js="over-panel__contents"]');
                     var focusables          = over_panel_contents.querySelectorAll('a, button, input, select, textarea');
                     var first_focusable     = focusables[0];
                     var last_focusable      = focusables[focusables.length - 1];
