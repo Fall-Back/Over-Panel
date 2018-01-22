@@ -29,13 +29,18 @@
   /* [1] */ }
 
 /*
-            This is a bit of a hack, but it's a way of letting JS know that this CSS has loaded.
-            It doesn't work for Opera Mini, but I'm happy to provide this browser only with the
-            unenhanced version.
-        */
-.over-panel::before {
-  content: 'CSS Loaded';
-  display: none; }
+		This is a bit of a hack, but it's a way of letting JS know that this CSS has loaded.
+		It doesn't work for Opera Mini, but I'm happy to provide this browser only with the
+		unenhanced version.
+        UPDATE: Due to problem with FOBP, now checking for existence of class in styesheet earlier
+        on, so this isn't needed:
+	*/
+/*.over-panel::before {
+		content: 'CSS Loaded';
+        display: none;
+	}*/
+.js-over-panel {
+  border: 0; }
 
 .over-panel-control {
   display: none; }
@@ -64,7 +69,7 @@
   /*
 			1. Make sure the over-panel is on top.
 		*/
-  .js-over-panel.over-panel {
+  .js-over-panel .over-panel {
     position: absolute;
     /* [1] */
     left: 0;
@@ -99,7 +104,7 @@
     visibility: visible;
     /* [1] */ }
   /* Slide effect: */
-  .js-over-panel.over-panel--slide .over-panel__contents {
+  .js-over-panel .over-panel--slide .over-panel__contents {
     -webkit-transform: translateY(-100%);
     -moz-transform: translateY(-100%);
     -ms-transform: translateY(-100%);
@@ -121,7 +126,7 @@
     -o-transition: -o-transform ease 0.8s;
     transition: transform ease 0.8s; }
   /* Fade effect: */
-  .js-over-panel.over-panel--fade .over-panel__contents {
+  .js-over-panel .over-panel--fade .over-panel__contents {
     opacity: 0; }
   .js-over-panel_is-animating.over-panel--fade .over-panel__contents {
     -webkit-transition: opacity ease 0.8s, visibility 0s 0.8s ease;
