@@ -5,6 +5,32 @@
     Released under the MIT license https://git.io/vwTVl
 */
 (function() {
+
+    var over_panel_js_classname           = 'js-over-panel';
+    var over_panel_control_js_classname   = 'js-over-panel-control';
+    var over_panel_is_open_classname      = 'js-over-panel_is-open';
+    var over_panel_is_animating_classname = 'js-over-panel_is-animating';
+
+    var check_for_css = function(selector) {
+        var rules;
+        var haveRule = false;
+        if (typeof document.styleSheets != "undefined") {// is this supported
+            var cssSheets = document.styleSheets;
+            outerloop:
+            for (var i = 0; i < cssSheets.length; i++) {
+                // using IE or FireFox/Standards Compliant
+                rules = (typeof cssSheets[i].cssRules != "undefined") ? cssSheets[i].cssRules : cssSheets[i].rules;
+                for (var j = 0; j < rules.length; j++) {
+                    if (rules[j].selectorText == selector) {
+                        haveRule = true;
+                        break outerloop;
+                    }
+                }
+            }
+        }
+        return haveRule;
+    }
+    
     var ready = function(fn) {
         if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
             fn();
@@ -36,21 +62,21 @@
 
         init: function() {
             var over_panels = document.querySelectorAll('.over-panel');
-            var over_panel_js_classname           = 'js-over-panel';
+            /*var over_panel_js_classname           = 'js-over-panel';
             var over_panel_control_js_classname   = 'js-over-panel-control';
             var over_panel_is_open_classname      = 'js-over-panel_is-open';
-            var over_panel_is_animating_classname = 'js-over-panel_is-animating';
+            var over_panel_is_animating_classname = 'js-over-panel_is-animating';*/
 
             var transitionEvent = whichTransitionEvent();
 
             // Note that `getComputedStyle` on psuedo elements doesn't work in Opera Mini, but in
             // this case I'm happy to serve only the unenhanced version to Opera Mini.
-            var css_is_loaded = (
+            /*var css_is_loaded = (
                 window.getComputedStyle(over_panels[0], ':before')
                 .getPropertyValue('content')
                 .replace(/(\"|\')/g, '')
                 == 'CSS Loaded'
-            );
+            );*/
 
             if (css_is_loaded) {
                 Array.prototype.forEach.call(over_panels, function(over_panel, i) {
@@ -159,6 +185,21 @@
             }
         }
 	}
+    
+    
+    var css_is_loaded = check_for_css('.' + over_panel_js_classname);
+    
+    if (css_is_loaded) {
+        // Add the JS class name ...
+        
+        var hmtl_el = document.querySelector('html');
+        
+        if (hmtl_el.classList) {
+            hmtl_el.classList.add(over_panel_js_classname);
+        } else {
+            hmtl_el.className += ' ' + over_panel_js_classname;
+        }
+    }
 
 	ready(over_panel.init);
 })();

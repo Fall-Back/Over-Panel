@@ -110,16 +110,23 @@ $fallback--over-panel__overlay-shadow:                  0 0 10px 5px #000 !defau
         width: 100%; /* [1] */
     }
 
-        /*
-            This is a bit of a hack, but it's a way of letting JS know that this CSS has loaded.
-            It doesn't work for Opera Mini, but I'm happy to provide this browser only with the
-            unenhanced version.
-        */
-        .over-panel::before {
-            content: 'CSS Loaded';
-            display: none;
-        }
-
+    
+    /*
+		This is a bit of a hack, but it's a way of letting JS know that this CSS has loaded.
+		It doesn't work for Opera Mini, but I'm happy to provide this browser only with the
+		unenhanced version.
+        UPDATE: Due to problem with FOBP, now checking for existence of class in styesheet earlier
+        on, so this isn't needed:
+	*/
+	/*.over-panel::before {
+		content: 'CSS Loaded';
+        display: none;
+	}*/
+    // Use this instead:
+    .js-over-panel {
+        // This could be any inconsequential declaration:
+        border: 0;
+    }
 
     .over-panel-control {
         display: none;
@@ -155,14 +162,14 @@ $fallback--over-panel__overlay-shadow:                  0 0 10px 5px #000 !defau
             1. Helps compatibiliy with Nav-Bar. No down-sides I can see. May have to revise if some
                become apparent.
         */
-        .js-over-panel.over-panel {
+        .js-over-panel .over-panel {
             //position: relative; /* [1] */
         }
 
 		/*
 			1. Make sure the over-panel is on top.
 		*/
-		.js-over-panel.over-panel {
+		.js-over-panel .over-panel {
 			position: absolute; /* [1] */
             left: 0;
             top: 0;
@@ -215,7 +222,7 @@ $fallback--over-panel__overlay-shadow:                  0 0 10px 5px #000 !defau
 
         /* Slide effect: */
 
-        .js-over-panel.over-panel--slide .over-panel__contents {
+        .js-over-panel .over-panel--slide .over-panel__contents {
             -webkit-transform: translateY(-100%);
             -moz-transform:    translateY(-100%);
             -ms-transform:     translateY(-100%);
@@ -250,7 +257,7 @@ $fallback--over-panel__overlay-shadow:                  0 0 10px 5px #000 !defau
 
         /* Fade effect: */
 
-        .js-over-panel.over-panel--fade .over-panel__contents {
+        .js-over-panel .over-panel--fade .over-panel__contents {
             opacity: 0;
         }
 
