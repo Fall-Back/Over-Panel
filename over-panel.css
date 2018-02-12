@@ -92,6 +92,7 @@
   .js-over-panel .over-panel__contents {
     position: absolute;
     left: 0;
+    top: auto;
     width: 100%;
     visibility: hidden;
     /* [1] */ }
