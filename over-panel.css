@@ -73,7 +73,6 @@
     position: absolute;
     /* [1] */
     left: 0;
-    top: 0;
     width: 100%; }
   .js-over-panel-control.over-panel-control {
     display: inline-block; }
@@ -93,7 +92,6 @@
   .js-over-panel .over-panel__contents {
     position: absolute;
     left: 0;
-    top: 2.25em;
     width: 100%;
     visibility: hidden;
     /* [1] */ }
