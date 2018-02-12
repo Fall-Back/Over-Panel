@@ -161,6 +161,7 @@
     /* 1 */
     color: #fff;
     background-color: #663399;
+    position: relative;
     z-index: 1;
     /* [2] */ }
   .js-over-panel-control.over-panel-control:hover,

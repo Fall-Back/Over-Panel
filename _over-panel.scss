@@ -313,6 +313,7 @@ $fallback--over-panel__overlay-shadow:                  0 0 10px 5px #000 !defau
             color: $fallback--over-panel__control--color;
             background-color: $fallback--over-panel__control--background-color;
 
+            position: relative;
 			z-index: 1; /* [2] */
         }
 
