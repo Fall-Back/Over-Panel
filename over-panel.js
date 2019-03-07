@@ -17,7 +17,13 @@
         var haveRule = false;
         if (typeof document.styleSheets != "undefined") {// is this supported
             var cssSheets = document.styleSheets;
+            
+            // IE doesn't have document.location.origin, so fix that:
+            if (!document.location.origin) {
+                document.location.origin = document.location.protocol + "//" + document.location.hostname + (document.location.port ? ':' + document.location.port: '');
+            }
             var domain_regex  = RegExp('^' + document.location.origin);
+            
             outerloop:
             for (var i = 0; i < cssSheets.length; i++) {
                 var sheet = cssSheets[i];
