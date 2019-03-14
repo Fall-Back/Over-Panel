@@ -6,7 +6,7 @@
         "Andy Kirk <andy.kirk@gridlight-design.co.uk>"
     ],
     "description": "Reveal an over-laid panel with slide or fade effects.",
-    "main": "over-panel.scss",
+    "main": "_over-panel.scss",
     "ignore": [],
     "keywords": [
         "fallback",
